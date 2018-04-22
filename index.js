@@ -41,19 +41,6 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use('/auth', require('./api/auth'))
-app.use('/user', checkSession, require('./api/user'))
-app.use('/student', checkSession, require('./api/student'))
-// app.use('/business', require('./api/business'))
-// app.use('/user', require('./api/user'))
-app.use('/req', checkSession, require('./api/req'))
-app.listen(9000, () => console.log('Example app listening on port 9000!'))
+app.use('/api', require('./api'))
 
-function checkSession(req, res, next) {
-  // check session
-  let ok = req.session.data && req.session.data.id
-  if (!ok) {
-    return res.send({status: false, session: null})
-  }
-  next()
-}
+app.listen(9000, () => console.log('Example app listening on port 9000!'))
