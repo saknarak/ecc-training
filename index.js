@@ -5,7 +5,7 @@ const MongoDBStore = require('connect-mongodb-session')(session)
 
 
 const store = new MongoDBStore({
-  uri: process.env.MONDB || 'mongodb://localhost:27017/eec-session',
+  uri: process.env.MONGODB || 'mongodb://localhost:27017/eec-session',
   collection: 'sessions'
 })
 
