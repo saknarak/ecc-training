@@ -20,21 +20,15 @@ router.get('/major', async (req, res) => {
 router.post('/manpower', async (req, res) => {
   // TODO:
   try {
-    let id = await req.db('req_human_power').insert({
-      business_id: req.body.businessId,
-      major_id: req.body.majorId,
-      level: req.body.level,
-      male: req.body.male,
-      female: req.body.female,
-      common: req.body.common,
-      org_date: req.body.orgDate,
-      req_date: req.body.reqDate,
-      change_req: req.body.changeReq,
-      req_start: req.body.reqStart,
-      req_end: req.body.reqEnd,
-      age_range: req.body.ageRange,
-      special_condition: req.body.specialCondition,
-    }).then(ids => ids[0])
+    let cols = [
+      'businessId', 'majorId', 'level', 'male', 'female', 'common', 'orgDate',
+      'reqDate', 'changeReq', 'reqStart', 'reqEnd', 'ageRange', 'specialCondition',
+    ]
+    let data = cols.reduce((p, x) => {
+      p[x] = req.body[x]
+      return p
+    }, {})
+    let id = await req.db('reqHumanPower').insert(data).then(ids => ids[0])
     if (!id) {
       throw new Error('insert error')
     }
