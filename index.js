@@ -5,6 +5,17 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 
 app.use((req, res, next) => {
+  var header = { 'Access-Control-Allow-Origin': '*' }
+  for (var i in req.headers) {
+    if (i.toLowerCase().substr(0, 15) === 'access-control-') {
+      header[i.replace(/-request-/g, '-allow-')] = req.headers[i]
+    }
+  }
+  res.header(header)
+  next()
+})
+
+app.use((req, res, next) => {
   req.db = require('./lib/db')
   next()
 })
