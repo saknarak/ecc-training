@@ -105,3 +105,4 @@ router.get('/token', (req, res) => {
   tokenList[token] = new Date()
   res.send({token})
 })
+

@@ -24,8 +24,8 @@ router.post('/manpower', async (req, res) => {
       'businessId', 'majorId', 'level', 'male', 'female', 'common', 'orgDate',
       'reqDate', 'changeReq', 'reqStart', 'reqEnd', 'ageRange', 'specialCondition',
     ]
-    let data = cols.reduce((p, x) => {
-      p[x] = req.body[x]
+    let data = cols.reduce((p, col) => {
+      p[col] = req.body[col]
       return p
     }, {})
     let id = await req.db('reqHumanPower').insert(data).then(ids => ids[0])
