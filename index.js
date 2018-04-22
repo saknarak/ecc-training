@@ -18,7 +18,7 @@ app.use(session({
   store,
   cookie: {
     maxAge: 15 * 60 * 1000, // 15min
-    secure: true,
+    // secure: true,
   },
   rolling: true,
   resave: true,
@@ -26,6 +26,7 @@ app.use(session({
 }))
 
 app.use((req, res, next) => {
+  console.log('session=', req.session.data)
   var header = { 'Access-Control-Allow-Origin': '*' }
   for (var i in req.headers) {
     if (i.toLowerCase().substr(0, 15) === 'access-control-') {
